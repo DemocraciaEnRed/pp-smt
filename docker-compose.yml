@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:3.6
+    ports:
+      - 27017:27017
+    volumes:
+      - ./tmp/db:/data/db
+
+  app:
+    network_mode: host
+    build:
+      context: .
+    image: ghcr.io/democraciaenred/presupuesto-participativo
+    volumes:
+      - .:/usr/src
+      - /usr/src/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_PATH=.
+      - NODE_ENV=development
+      - DEBUG=democracyos*
+    command: ./node_modules/.bin/gulp bws

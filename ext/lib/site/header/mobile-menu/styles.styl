@@ -1,0 +1,58 @@
+/* activado desde js/component en max-width: 975px */
+.mobile-nav
+  margin-right: 17px
+  @media screen and (min-width: 500px)
+    margin-left: 25px
+    margin-right: 20px
+  .mobile-menu
+    margin-bottom: 2px // corrige alineacion
+    display: inline-block
+    width: 30px
+    height: 30px
+    background-image: url('/ext/lib/site/header/mobile-menu/mobile-menu.svg')
+    background-repeat: no-repeat
+    background-size: cover
+    cursor: pointer
+    &:hover, &:active
+      color: $azulPrimary
+  .mobile-menu-display
+    display: block
+    position: absolute
+    width: 100%
+    left: 0
+    top: 80px
+    background: white
+    ul
+      padding: 10px 10px
+      border-width: 1px 0
+      border-style: solid
+      border-color: #e8
+      list-style-type: none
+      font-family: AlfabetLight
+      font-size: 22px
+      .header-item
+        margin: 0
+        padding-left: 25px;
+        .header-link
+          padding: 10px 0
+          font-size: 17px
+          width: 100%
+          &:hover, &.active, &:focus
+            background-color: transparent;
+    .user-badge
+      height: auto!important
+      .dropdown-list
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 1000;
+        padding: 0;
+        width: 100%;
+     
+        font-size: 14px;
+        white-space: nowrap;
+        list-style: none;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        box-shadow: 1px 1px 4px -1px rgba(0, 0, 0, 0.175);
+        color: #000;
+        background-color: #f9f9f9;
