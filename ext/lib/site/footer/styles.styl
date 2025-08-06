@@ -86,20 +86,43 @@
     display: flex;
     flex: 1
     justify-content: center;
+    align-items: flex-end;
     width: 100%;
     padding: 20px;
+    gap: 30px
+    flex-direction: column;
     @media (max-width: 550px)
-      flex-direction: column
       align-items: center
-  .logo-der
-    display: flex;
-    align-items: center;
-    span
-      color:white
-      font-size: 12px;
-      margin-left: 10px;
-    img
-      width: 86px
+  a
+    width:100%
+    .logo-smt
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      @media (max-width: 550px)
+        justify-content: center
+      span
+        color:white
+        font-size: 12px;
+        margin-left: 10px;
+      img
+        width: 205px;
+        background: #fff;
+        padding: 10px;
+        border-radius: 10px;
+
+    .logo-der
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      @media (max-width: 550px)
+        justify-content: center
+      span
+        color:white
+        font-size: 12px;
+        margin-left: 10px;
+      img
+        width: 86px
   .logo-access
     padding: 15px;
     position: relative;

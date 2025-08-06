@@ -11,9 +11,7 @@
   "signinUrl": "",
   "signupUrl": "",
   "settingsUrl": "",
-  "staff": [
-    "it@democracyos.org"
-  ],
+  "staff": ["it@democracyos.org"],
   "allowEmailAliases": true,
   "facebookSignin": false,
   "publicEmails": false,
@@ -27,9 +25,7 @@
     "facebook": {
       "clientID": "",
       "clientSecret": "",
-      "permissions": [
-        "email"
-      ]
+      "permissions": ["email"]
     }
   },
   "https": {
@@ -115053,6 +115049,7 @@
     "uk",
     "zh_TW"
   ],
+  "owner": "",
   "enforceLocale": true,
   "forumProyectos": "proyectos",
   "adminMail": "it@democracyos.org",

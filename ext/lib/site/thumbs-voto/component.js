@@ -50,7 +50,7 @@ export default function ThumbsVoto(props) {
 
         <div className="row cont">
           <div className="col-md-4">
-            <div className='fondo-rosa rounded-xl p-1'>
+            <div className='fondo-celeste rounded-xl p-1'>
               <div
                 className="que-son img-responsive"
                 style={styleIcono1}>
@@ -65,7 +65,7 @@ export default function ThumbsVoto(props) {
           </div>
 
           <div className="col-md-4">
-            <div className='fondo-rosa rounded-xl p-2'>
+            <div className='fondo-celeste rounded-xl p-2'>
               <div
                 className="que-propongo img-responsive"
                 style={styleIcono2}>
@@ -78,7 +78,7 @@ export default function ThumbsVoto(props) {
           </div>
 
           <div className="col-md-4">
-            <div className='fondo-rosa rounded-xl p-2'>
+            <div className='fondo-celeste rounded-xl p-2'>
 
               <div
                 className="como-sigo img-responsive"

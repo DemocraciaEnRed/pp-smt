@@ -33,14 +33,19 @@ export default class Footer extends Component {
               <h3>CONTACTO</h3>
               <p dangerouslySetInnerHTML={{ __html: texts['footer-info'] }}></p>
               <div className='social-icon'>
-            <a aria-label='Ícono de facebook' className='social-facebook' tabIndex="102" href='https://www.facebook.com/democraciaenred' target="_blank" />
-            <a aria-label='Ícono de instagram' className='social-instagram' tabIndex="103" href='https://www.instagram.com/democraciaenred' target="_blank" />
-            <a aria-label='Ícono de twitter' className='social-twitter' tabIndex="104" href='https://x.com/fundacionDER' target="_blank" />
-            <a aria-label='Ícono de mail' className='social-mail' tabIndex="105" href='mailto:speak@democraciaenred.org' target="_blank" />
+                <a aria-label='Ícono de facebook' className='social-facebook' tabIndex="102" href='https://www.facebook.com/MuniSMTucuman' target="_blank" />
+                <a aria-label='Ícono de instagram' className='social-instagram' tabIndex="103" href='https://instagram.com/munismtucuman' target="_blank" />
+                <a aria-label='Ícono de twitter' className='social-twitter' tabIndex="104" href='https://twitter.com/MuniSMT' target="_blank" />
+                {/* <a aria-label='Ícono de mail' className='social-mail' tabIndex="105" href='mailto:speak@democraciaenred.org' target="_blank" /> */}
               </div>
             </div>
 
             <div className='logos'>
+              <a href="https://democraciaenred.org/" rel="noopener noreferer" target="_blank">
+                <div className='logo-smt'>
+                  <img src="/ext/lib/boot/logo-smt.png" alt="Logo democracia en red" />
+                </div>
+              </a>
               <a href="https://democraciaenred.org/" rel="noopener noreferer" target="_blank">
                 <div className='logo-der'>
                   <img src="/ext/lib/site/footer/logo-der.png" alt="Logo democracia en red" />
