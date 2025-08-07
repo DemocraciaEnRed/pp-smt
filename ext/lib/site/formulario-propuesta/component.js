@@ -3,6 +3,7 @@ import config from 'lib/config'
 import forumStore from 'lib/stores/forum-store/forum-store'
 import topicStore from 'lib/stores/topic-store/topic-store'
 import zonaStore from 'lib/stores/zona-store'
+import VectorMap from 'ext/lib/site/banner-mapa-vectores/vectorMap'
 
 import tagStore from 'lib/stores/tag-store/tag-store'
 import Tags from 'lib/admin/admin-topics-form/tag-autocomplete/component'
@@ -10,6 +11,7 @@ import Attrs from 'lib/admin/admin-topics-form/attrs/component'
 import { browserHistory } from 'react-router'
 import userConnector from 'lib/site/connectors/user'
 import { Link } from 'react-router'
+
 
 // const PROPOSALS_FORUM_NAME = 'propuestas'
 
@@ -68,6 +70,7 @@ class FormularioPropuesta extends Component {
   }
 
   handleInputChange(evt) {
+
     evt.preventDefault()
     const { target: { value, name } } = evt
     this.setState({ [name]: value })
@@ -267,6 +270,17 @@ class FormularioPropuesta extends Component {
     }
   }
 
+  handleZona = (zonaId) => {
+    this.handleInputChange({
+      preventDefault: () => {
+      },
+      target: {
+        name: 'zona',
+        value: zonaId
+      }
+    })
+  }
+
   render() {
     const { forum, zonas, requirementsAccepted } = this.state
 
@@ -316,7 +330,7 @@ class FormularioPropuesta extends Component {
                 disabled={true} />
             </div>
 
-            <div className='form-group'>
+            {/* <div className='form-group'>
               <label htmlFor='zona'>
                 Zona
               </label>
@@ -337,7 +351,7 @@ class FormularioPropuesta extends Component {
                 )}
               </select>
 
-            </div>
+            </div> */}
             <div className='form-group'>
               <label className='required' htmlFor='email'>
                 Email
@@ -460,6 +474,22 @@ class FormularioPropuesta extends Component {
                 <p className='section-title'>Contanos sobre tu idea</p>
               </div>
 
+              <div className='form-group mt-5'>
+                <label className='required' htmlFor='zona'>
+                  * Zona de la idea
+                </label>
+                <p className="help-text">Elegí una Zona</p>
+                <VectorMap action={this.handleZona} votacion />
+
+                {/* <input
+                  className='form-control'
+                  required
+                  type='text'
+                  max='128'
+                  name='titulo'
+                  value={this.state['titulo']}
+                  onChange={this.handleInputChange} /> */}
+              </div>
 
               <div className='form-group mt-5'>
                 <label className='required' htmlFor='titulo'>

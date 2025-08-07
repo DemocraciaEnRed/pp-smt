@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import config from 'lib/config'
-
+import topicStore from 'lib/stores/topic-store/topic-store'
 import VectorMap from './vectorMap'
 
 
@@ -23,34 +23,17 @@ export default class BannerForoVecinal extends React.Component {
 
   fetchTopics = (zona) => {
 
-    var query = {
+    let query = {
       forumName: config.forumProyectos,
-      zonas: zona,
-      tipoIdea: 'factible',
       year: '2025',
-    };
+      zonas: zona,
+      tipoIdea: 'factible'
+    }
+    topicStore.findAllProyectosWithQuery(query).then((topics) => {
+      this.setState({ topics: topics })
+    })
+      .catch((err) => { throw err })
 
-    var queryString = Object.keys(query)
-      .filter(function (k) {
-        return query[k] && query[k].length > 0;
-      })
-      .map(function (k) {
-        return k + '=' + (Array.isArray(query[k]) ? query[k].join(',') : query[k]);
-      })
-      .join('&');
-
-    window.fetch('/ext/api/topics?' + queryString, { credentials: 'include' })
-      .then(function (res) {
-        return res.json();
-      })
-      .then((res) => {
-        var topics = res.results && res.results.topics ? res.results.topics : [];
-        this.setState({ topics: topics })
-
-      })
-      .catch(function (err) {
-        console.error(err);
-      });
   }
 
   render() {

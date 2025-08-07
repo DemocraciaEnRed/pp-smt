@@ -45,9 +45,23 @@ export default class VectorMap extends React.Component {
                     }).bindPopup('<a href="/propuestas/topic/' + t.id + '"><strong>' + (t.mediaTitle || 'Sin título') + '</strong></a><br/>' +
                         'Barrio: ' + (t.attrs.barrio || 'Desconocido') + '<br/>');
                     this.markersGroup.addLayer(marker);
+                } else {
+                    let geoZona = null
+                    this.map.eachLayer(function (layer) {
+                        if (layer instanceof L.GeoJSON) {
+                            layer.eachLayer(layer => {
+                                if (layer.feature.properties.numero === t.zona.numero) geoZona = layer
+                            })
+                        }
+                    });
+                    var { lat, lng } = geoZona.getBounds().getCenter()
+                    var marker = L.marker([lat, lng], {
+                        icon: locationIcon
+                    }).bindPopup('<a href="/propuestas/topic/' + t.id + '"><strong>' + (t.mediaTitle || 'Sin título') + '</strong></a><br/>' +
+                        'Barrio: ' + (t.attrs.barrio || 'Desconocido') + '<br/>');
+                    this.markersGroup.addLayer(marker);
                 }
             }
-
             this.markersGroup.addTo(this.map);
         }
     }
