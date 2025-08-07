@@ -115054,5 +115054,6 @@
   "forumProyectos": "proyectos",
   "adminMail": "it@democracyos.org",
   "adminPass": "123123",
-  "googleSheetApiKey": ""
+  "googleSheetApiKey": "",
+  "customSignin": true
 }
