@@ -18,6 +18,7 @@ import VotoCualquierZona from "./steps/votoCualquierZona"
 import Confirmacion from "./steps/confirmacion"
 import Agradecimiento from "./steps/agradecimiento"
 import Welcome from "./steps/bienvenida"
+import Skeleton from '../skeleton/component'
 
 class FormularioVoto extends Component {
   constructor(props) {
@@ -469,7 +470,7 @@ class FormularioVoto extends Component {
     if (!forum) return null
     if (!forum.config.stage === 'votacion') return <Close />
 
-    if (!forumAndTopicFetched || !userFetched) return (<p>Loading...</p>)
+    if (!forumAndTopicFetched || !userFetched) return (<Skeleton />)
 
     const confirm = 5
     const welcome = 1

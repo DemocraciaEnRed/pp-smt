@@ -1,0 +1,90 @@
+/* SkeletonIdeas.styl */
+.skeleton-container
+  padding: 20px
+  font-family: sans-serif
+
+.skeleton-header
+  width: 60%
+  height: 30px
+  background: #e0e0e0
+  border-radius: 6px
+  margin-bottom: 10px
+  animation: pulse 1.5s infinite
+
+.skeleton-subheader
+  width: 40%
+  height: 20px
+  background: #e0e0e0
+  border-radius: 6px
+  margin-bottom: 20px
+  animation: pulse 1.5s infinite
+
+.skeleton-filters
+  display: flex
+  gap: 10px
+  margin-bottom: 20px
+
+.skeleton-filter
+  flex: 1
+  height: 35px
+  background: #e0e0e0
+  border-radius: 6px
+  animation: pulse 1.5s infinite
+
+.skeleton-search
+  width: 100%
+  height: 35px
+  background: #e0e0e0
+  border-radius: 6px
+  margin-bottom: 20px
+  animation: pulse 1.5s infinite
+
+.skeleton-card
+  margin: 10px 0
+  padding: 15px
+  border: 1px solid #ddd
+  border-radius: 10px
+  background: white
+
+.skeleton-card-header
+  display: flex
+  align-items: center
+  gap: 10px
+  margin-bottom: 15px
+
+.skeleton-avatar
+  width: 30px
+  height: 30px
+  background: #e0e0e0
+  border-radius: 50%
+  animation: pulse 1.5s infinite
+
+.skeleton-line
+  width: 100%
+  height: 15px
+  background: #e0e0e0
+  border-radius: 6px
+  margin-bottom: 8px
+  animation: pulse 1.5s infinite
+
+  &.short
+    width: 50%
+
+.skeleton-tags
+  display: flex
+  gap: 8px
+
+.skeleton-tag
+  width: 60px
+  height: 20px
+  background: #e0e0e0
+  border-radius: 6px
+  animation: pulse 1.5s infinite
+
+@keyframes pulse
+  0%
+    background-color: #e0e0e0
+  50%
+    background-color: #f0f0f0
+  100%
+    background-color: #e0e0e0
