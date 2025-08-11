@@ -70,6 +70,7 @@ class HomePropuestas extends Component {
   }
 
   componentDidMount() {
+    const { archive } = this.props;
     window.scrollTo(0, 0)
     if (this.props.location.query.tags)
       defaultValues.tag.push(this.props.location.query.tags)
@@ -84,12 +85,15 @@ class HomePropuestas extends Component {
     ]).then(results => {
       const [zonas, tags, forum, textsDict] = results
       const tagsMap = tags.map(tag => { return { value: tag.id, name: tag.name }; });
+      const tipoIdea = forum.config.stage === 'ideacion' ? ['pendiente'] : forum.config.stage === 'preVotacion' || forum.config.stage === 'votacion' ? ['factible'] : forum.config.stage === 'seguimiento' ? ['ganador'] : []
+
       const tiposIdea = forum.topicsAttrs.find(a => a.name == 'state').options.map(state => { return { value: state.name, name: state.title }; })
       this.getQueryParams()
       this.setState({
         zonas: zonas.map(zona => { return { value: zona._id, name: zona.nombre }; }),
         tags: tagsMap,
         tiposIdea,
+        tipoIdea: archive ? ['ganador'] : tipoIdea,
         forum,
         texts: textsDict,
 

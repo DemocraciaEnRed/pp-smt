@@ -53,7 +53,7 @@ app.get('/topics',
       },
       tipoIdea: {
         type: 'string',
-        default: ''
+        default: false
       },
       years: {
         type: 'string',
