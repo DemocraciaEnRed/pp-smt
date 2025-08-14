@@ -19,7 +19,7 @@ export default function Skeleton() {
       <div className="skeleton-search"></div>
 
       {/* Lista de proyectos */}
-      {Array.from({ length: 4 }).map((e, i) => <div className="skeleton-card">
+      {Array.from({ length: 4 }).map((e, i) => <div key={i} className="skeleton-card">
         <div className="skeleton-card-header">
           <div className="skeleton-avatar"></div>
           <div className="skeleton-line short"></div>

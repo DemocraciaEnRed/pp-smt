@@ -69,6 +69,10 @@ export default class FilterPropuestas extends Component {
     }
   }
 
+  selectAll = (filter, allOptions) => {
+    this.props.selectAll(filter, allOptions)
+  }
+
   render() {
     //console.log('Render filters')
 
@@ -114,6 +118,7 @@ export default class FilterPropuestas extends Component {
             tabIndex="110"
             activeDropdown={this.state.activeDropdown}
             clearedFilters={this.state.clearedFilters}
+            selectAll={this.selectAll}
             handleDropdown={this.handleDropdown}
             handleFilter={this.handleFilter}
             clearFilter={this.clearFilter}
@@ -126,6 +131,7 @@ export default class FilterPropuestas extends Component {
 
             activeDropdown={this.state.activeDropdown}
             clearedFilters={this.state.clearedFilters}
+            selectAll={this.selectAll}
             handleDropdown={this.handleDropdown}
             handleFilter={this.handleFilter}
             clearFilter={this.clearFilter}
@@ -148,6 +154,7 @@ export default class FilterPropuestas extends Component {
 
             activeDropdown={this.state.activeDropdown}
             clearedFilters={this.state.clearedFilters}
+            selectAll={this.selectAll}
             handleDropdown={this.handleDropdown}
             handleFilter={this.handleFilter}
             clearFilter={this.clearFilter}
@@ -172,7 +179,7 @@ class FilterBox extends Component {
   render() {
     const {
       name, title, allOptions, activeOptions,
-      activeDropdown, clearedFilters,
+      activeDropdown, clearedFilters, selectAll,
       handleDropdown, handleFilter, clearFilter
     } = this.props
 
@@ -207,14 +214,19 @@ class FilterBox extends Component {
                     type='checkbox'
                     value={obj.value}
                     onChange={handleFilter(name)}
-                    checked={hasSelection && activeOptions.includes(obj.value)} />
+                    checked={activeOptions.includes(obj.value)} />
                   <span className='checkbox-label'>{obj.name}</span>
                 </label>
               ))}
             </div>
-            <button className='clear-filters' onClick={clearFilter(name)}>
-              <span>Ver todos</span>
-            </button>
+            <div className='filter-deopdown-action'>
+              <button className='clear-filters' onClick={clearFilter(name)}>
+                <span>borrar filtros</span>
+              </button>
+              <button className='clear-filters' onClick={() => selectAll(name, allOptions)}>
+                <span>Ver todos</span>
+              </button>
+            </div>
           </div>
         }
 

@@ -72,8 +72,10 @@ class HomePropuestas extends Component {
   componentDidMount() {
     const { archive } = this.props;
     window.scrollTo(0, 0)
-    if (this.props.location.query.tags)
-      defaultValues.tag.push(this.props.location.query.tags)
+    let { tipoIdea: queryTipoIdea, tag, distrito } = this.props.location.query
+    if (tag) defaultValues.tag.push(tag);
+    queryTipoIdea = [].concat(queryTipoIdea || []);
+
 
     // igual que filtros de admin (lib/admin/admin/admin.js)
     Promise.all([
@@ -85,7 +87,7 @@ class HomePropuestas extends Component {
     ]).then(results => {
       const [zonas, tags, forum, textsDict] = results
       const tagsMap = tags.map(tag => { return { value: tag.id, name: tag.name }; });
-      const tipoIdea = forum.config.stage === 'ideacion' ? ['pendiente'] : forum.config.stage === 'preVotacion' || forum.config.stage === 'votacion' ? ['factible'] : forum.config.stage === 'seguimiento' ? ['ganador'] : []
+      const tipoIdea = queryTipoIdea.length ? queryTipoIdea : forum.config.stage === 'ideacion' ? ['pendiente'] : forum.config.stage === 'preVotacion' || forum.config.stage === 'votacion' ? ['factible'] : forum.config.stage === 'seguimiento' ? ['ganador'] : []
 
       const tiposIdea = forum.topicsAttrs.find(a => a.name == 'state').options.map(state => { return { value: state.name, name: state.title }; })
       this.getQueryParams()
@@ -226,6 +228,16 @@ class HomePropuestas extends Component {
       [filter]: []
     }, () => this.fetchTopics())
   }
+
+  selectAll = (filter, alloptions) => {
+    console.log(alloptions.map(opt => opt.value));
+
+    this.setState({
+      [filter]: alloptions.map(opt => opt.value)
+    }, () => this.fetchTopics())
+  }
+
+
 
 
   // esta misma función está en ext/lib/site/topic-layout/component.js
@@ -395,6 +407,7 @@ class HomePropuestas extends Component {
               handleFilter={this.handleFilter}
               handleDefaultFilter={this.handleDefaultFilter}
               clearFilter={this.clearFilter}
+              selectAll={this.selectAll}
               handleRemoveBadge={this.handleRemoveBadge} />
 
             <div className='row'>
