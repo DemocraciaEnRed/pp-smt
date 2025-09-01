@@ -36,7 +36,7 @@ const textsData = [
   { "name": "home-banner-button2-link", "text": '/votacion' },
 
   //ideas y proyectos
-  { "name": "idea-title", "text": "Ideas y proyectos" },
+  { "name": "idea-title", "text": "Ideas y Proyectos" },
   {
     "name": "idea-subtitle", "text": 'Conocé los proyectos ganadores del Presupuesto Participativo 2025'
   },
@@ -52,7 +52,7 @@ const textsData = [
 
   //footer
   {
-    "name": "footer-info", "text": "<div>Dirección de Centros Vecinales</div><div><b>Dirección</b>: 9 de julio 570Telefono: 4516500</div>"
+    "name": "footer-info", "text": "<div>Dirección de Centros Vecinales</div><div><b>Dirección</b>: 9 de julio 570</div><div><b>Telefono</b>: 4516500</div>"
   }
 
 ]

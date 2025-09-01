@@ -6,15 +6,9 @@ const Tag = models.Tag
 const Eje = models.Eje
 
 const etiquetas = [
-  { nombre: 'Otras Ideas Innovadoras' },
-  { nombre: 'Asfalto/Mejora asfaltica' },
-  { nombre: 'Luminarias' },
-  { nombre: 'Semáforos/Reductores de velocidad' },
-  { nombre: 'Plazas/Espacios públicos' },
-  { nombre: 'Capacitaciones/Actividades deportivas' },
-  { nombre: 'Bicisendas' },
-  { nombre: 'Mejoras de accesibilidad' },
-  { nombre: 'Ideas para Organizaciones/Clubes' },
+  { nombre: 'Espacio socio ambiental' },
+  { nombre: 'Espacio cultural deportivo' },
+  { nombre: 'Espacio de innovación urbana' },
 ]
 
 const tags = etiquetas.map(etiqueta => {
