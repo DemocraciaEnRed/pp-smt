@@ -52,7 +52,7 @@ const textsData = [
 
   //footer
   {
-    "name": "footer-info", "text": "<div>Dirección de Centros Vecinales</div><div><b>Dirección</b>: 9 de julio 570</div><div><b>Telefono</b>: 4516500</div>"
+    "name": "footer-info", "text": '<strong>Municipalidad de San Miguel de Tucumán</strong><br>  9 de Julio 570<br>  SMT, Tucumán T4000IHL<br>  Argentina<br>  <a href="tel: +543814516500">+54 381 4516500</a> int. 6517'
   }
 
 ]

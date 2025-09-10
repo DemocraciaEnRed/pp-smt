@@ -49,7 +49,7 @@ export default class Footer extends Component {
               <a href="https://democraciaenred.org/" rel="noopener noreferer" target="_blank">
                 <div className='logo-der'>
                   <img src="/ext/lib/site/footer/logo-der.png" alt="Logo democracia en red" />
-                  <span>Desarrollado por<br /><b>Democracia en red</b></span>
+                  <span><b>Democracia en red</b></span>
                 </div>
               </a>
             </div>
