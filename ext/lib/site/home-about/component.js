@@ -9,7 +9,7 @@ import Anchor from 'ext/lib/site/anchor'
 import forumStore from 'lib/stores/forum-store/forum-store'
 
 export default class HomeAbout extends Component {
-  constructor () {
+  constructor() {
     super()
 
     this.state = {
@@ -18,7 +18,7 @@ export default class HomeAbout extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     aboutStore
       .findAll()
       .then((faqs) => this.setState({ faqs }))
@@ -38,11 +38,11 @@ export default class HomeAbout extends Component {
       })
   }
 
-  goTop () {
+  goTop() {
     window.scrollTo(0, 0)
   }
 
-  render () {
+  render() {
     const faqs = this.state.faqs
 
     return (
@@ -60,11 +60,11 @@ export default class HomeAbout extends Component {
             <div className='filas'>
               <div className='faq text-left'>
                 <p className='p-padding'>Accedé al <a href="#">reglamento general</a> de presupuesto participativo. En este espacio te dejamos algunas normas básicas para que conozcas el funcionamiento del Presupuesto Participativo.</p>
-                {faqs && 
+                {faqs &&
                   <Accordion startPosition={-1}>
                     {faqs.map((faq) => (
                       <div key={faq.id} data-trigger={`${faq.question}`}>
-                        <p className='p-padding' dangerouslySetInnerHTML={{ __html: faq.answer }} ></p>
+                        <p className='p-padding answer' dangerouslySetInnerHTML={{ __html: faq.answer }} ></p>
                       </div>
                     ))}
                   </Accordion>

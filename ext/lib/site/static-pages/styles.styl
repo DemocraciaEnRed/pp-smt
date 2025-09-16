@@ -406,7 +406,7 @@
         &:hover
           svg
             g, polygon
-              fill: #7cbb42
+              fill: $azulPrimary
     .btns-historial
       margin-bottom: 20px
     .portal-vl
@@ -543,6 +543,43 @@
     @media(max-width: 420px)
       top: 117px
       width: 60%
+  
+.banner-privacidad
+  .contenedor
+    display: block
+    text-align: center
+    margin: 2rem 0
+    @media(max-width: 420px)
+      width: 75%
+      margin: 0 auto
+    .fondo-titulo
+      display: inline-flex
+      justify-content: center
+      align-items: center
+      background-color: $azulPrimary;
+      color: white
+      text-align: center
+      margin: 0 auto
+      padding: 15px 40px 9px
+      letter-spacing: 1px
+      z-index: 99
+      @media(max-width: 768px)
+        padding: 15px 20px 9px
+      h1
+        font-family: 'Poppins', sans-serif
+        padding: 0
+        margin: 0 auto
+        font-size: 54px
+        font-weight: 400
+        text-transform: uppercase
+        @media(max-width: 768px)
+          font-size: 20px
+        @media(max-width: 1085px) and (min-width: 768px)
+          font-size: 40px
+  .largo
+    @media(max-width: 420px)
+      top: 117px
+      width: 60%
 
 // BANNER TERMINOS Y CONDICIONES
 
@@ -551,7 +588,7 @@
   @media screen and (max-width: 768px)
     padding: 0 15px
   h2
-    color: #7cbb42
+    color: $azulPrimary
 .ext-reglamento
   p, ul li
     color: #555
@@ -560,7 +597,7 @@
   .underline
     text-decoration: underline
   h2
-    color: #7cbb42
+    color: $azulPrimary
   h4
     color: #444
 
@@ -618,7 +655,7 @@
   padding-top:3em
 
 .p-padding
-  padding:10px
+  padding: 0 .8rem
 
 .alinear
   table

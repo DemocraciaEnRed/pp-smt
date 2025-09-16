@@ -43,7 +43,7 @@ export default class BannerForoVecinal extends React.Component {
         <div className="row">
           <div className="col-md-12">
             <div className="fondo-titulo">
-              <h2>ZONAS DE SAN MIGUEL DE TUCUMAN</h2>
+              <h2>ZONAS DE SAN MIGUEL DE TUCUMÁN</h2>
             </div>
           </div>
         </div>

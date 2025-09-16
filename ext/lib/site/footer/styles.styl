@@ -113,7 +113,7 @@
 
     .logo-der
       display: flex;
-      align-items: center;
+      align-items: end;
       justify-content: end;
       @media (max-width: 550px)
         justify-content: center
@@ -121,8 +121,10 @@
         color:white
         font-size: 15px;
         margin-left: 10px;
+        margin-bottom: 2px
       img
-        width: 70px
+        width: 24px;
+        margin-left: 15px;
   .logo-access
     padding: 15px;
     position: relative;
@@ -157,16 +159,11 @@
     .social-whatsapp
       background-repeat: no-repeat
       background-size: cover
-      width: 22px
-      height: 22px
+      width: 36px
+      height: 36px
       margin: 0 5%
       display: inline-block
-      @media screen and (min-width: 500px)
-        width: 28px
-        height: 28px
-      @media screen and (min-width: 769px)
-        width: 28px
-        height: 28px
+      
     .social-facebook
       background-image: unquote("url('ext/lib/site/footer/facebook-c.png')")
     .social-twitter

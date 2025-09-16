@@ -1,18 +1,18 @@
-import React, {Component} from 'react'
-import Footer from   'ext/lib/site/footer/component'
+import React, { Component } from 'react'
+import Footer from 'ext/lib/site/footer/component'
 import Jump from 'ext/lib/site/jump-button/component'
 import Anchor from 'ext/lib/site/anchor'
 
 export default class Page extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.goTop()
   }
 
-  goTop () {
+  goTop() {
     Anchor.goTo('container')
   }
 
-  render () {
+  render() {
     return (
       <div>
         <section className="banner-static">
@@ -34,23 +34,23 @@ export default class Page extends Component {
             <h2><span>Registro en la plataforma web</span></h2>
             <p>
               El ingreso a presupuesto participativo no requiere registro online previo, el mismo será requerido si la/el usuaria/o desea publicar contenidos o interactuar con otros/as usuarios/as. <br />
-              Esperamos que te registres usando tu nombre. Las cuentas de "bots" u otros registros automáticos no están permitidas. Los/as usuarios/as son responsables de preservar la privacidad de su cuenta protegiendo el acceso a sus contraseñas. Por favor, ante cualquier ingreso indebido en tu cuenta, comunicate inmediatamente a través de <a href="mailto:speak@democracyos.org">speak@democracyos.org</a>
+              Esperamos que te registres usando tu nombre. Las cuentas de "bots" u otros registros automáticos no están permitidas. Los/as usuarios/as son responsables de preservar la privacidad de su cuenta protegiendo el acceso a sus contraseñas. Por favor, ante cualquier ingreso indebido en tu cuenta, comunicate inmediatamente a través de <a href="mailto:contacto@democraciaenred.org">contacto@democraciaenred.org</a>
             </p>
 
             <h2><span>Validación de usuarios</span></h2>
             <p>Presupuesto participativo se reserva el derecho de validar la información brindada por la/el usuaria/o al momento de la inscripción. En caso de que la información brindada no pueda validarse, Presupuesto Participativo se reserva el derecho de no dar de alta a ese usuario/a. Por su parte, Presupuesto Participativo deslinda su responsabilidad en el caso de no ser veraz la información suministrada al respecto.<br />
               Al momento de la inscripción el/la usuario/a asume el compromiso y la responsabilidad de:</p>
             <ul>
-                <li>No proporcionar información personal falsa ni crear cuentas a nombre de terceras personas sin autorización.</li>
-                <li>No crear más de una cuenta personal.</li>
-                <li>No compartir la contraseña ni permitir que otra persona acceda a su cuenta.</li>
+              <li>No proporcionar información personal falsa ni crear cuentas a nombre de terceras personas sin autorización.</li>
+              <li>No crear más de una cuenta personal.</li>
+              <li>No compartir la contraseña ni permitir que otra persona acceda a su cuenta.</li>
               <li>Los/as usuarios/as se comprometen a notificar a presupuesto participativo del uso no autorizado de su clave.</li>
               <li>presupuesto participativo se reserva el derecho de rechazar cualquier solicitud de inscripción o de cancelar un registro previamente aceptado.</li>
             </ul>
 
             <h2><span>Usuarios, obligaciones y condiciones</span></h2>
             <p>
-              La/El usuaria/o deberá respetar estos Términos y Condiciones de Uso. Las infracciones por acción u omisión de estos Términos y Condiciones de Uso generarán el derecho a favor de Presupuesto Participativo de suspender al/la usuario/a que las haya realizado.<br/>
+              La/El usuaria/o deberá respetar estos Términos y Condiciones de Uso. Las infracciones por acción u omisión de estos Términos y Condiciones de Uso generarán el derecho a favor de Presupuesto Participativo de suspender al/la usuario/a que las haya realizado.<br />
               La/El usuaria/o es responsable del contenido que suba, publique o muestre en presupuesto participativo, garantizando que el mismo no infringe derechos de terceras personas ni los Términos y Condiciones de Uso ni viola ninguna ley, reglamento u otra normativa. Los/as usuarios/as entienden y aceptan que el material y/o contenido que suba y/o publique podría ser utilizado por otros/as usuarios/as de la plataforma web y/o por terceras personas ajenas, y que presupuesto participativo no será responsable en ningún caso por tales utilizaciones.<br />
               La/El usuaria/o debe usar presupuesto participativo en forma correcta y lícita. En caso contrario, presupuesto participativo podrá retirar el contenido y/o suspender la cuenta de aquellos/as usuarios/as que incurran en actitudes contrarias a estos términos y condiciones y/o de la política de privacidad, ofensivas, ilegales, violatorias de derechos de terceras personas, contrarias a la moral y buenas costumbres y/o amenaza para la seguridad de otros usuarios.<br />
 
@@ -68,7 +68,7 @@ export default class Page extends Component {
               <li>Promover, defender o mostrar pornografía, obscenidad, vulgaridad, blasfemia, odio, fanatismo, racismo y/o violencia. En caso de sufrir alguna de estas situaciones, comunicarse con el Administrador a través de presupuesto participativo.</li>
               <li>Vulnerar los derechos establecidos en la Ley N° 25.326 de Protección de Datos Personales.</li>
             </ul>
-            <p>En caso de sufrir alguna de estas situaciones, comunicarse con Presupuesto Participativo a través de  <a href="mailto:speak@democracyos.org">speak@democracyos.org</a>.</p>
+            <p>En caso de sufrir alguna de estas situaciones, comunicarse con Presupuesto Participativo a través de  <a href="mailto:contacto@democraciaenred.org">contacto@democraciaenred.org</a>.</p>
 
             <h2><span>Moderación de la actividad en Presupuesto Participativo</span></h2>
             <p>La actividad en esta plataforma web contará con moderadores/as responsables de hacer cumplir estos Términos y Condiciones de Uso.</p>
@@ -76,10 +76,19 @@ export default class Page extends Component {
               <li>Rechazar o eliminar contenido que no cumpla con estos términos de uso o que, de alguna forma, sea cuestionable.</li>
               <li>Quitar el acceso a quien no cumpliera, de alguna forma, con estos términos de uso.</li>
             </ul>
-
-            <h1><span>Políticas de Privacidad</span></h1>
+          </div>
+        </Anchor>
+        <section className='banner-privacidad'>
+          <div className='contenedor largo'>
+            <div className='fondo-titulo'>
+              <h1>Políticas de Privacidad</h1>
+            </div>
+          </div>
+        </section>
+        <Anchor id='container'>
+          <div className='ext-terminos-y-condiciones'>
             <p>
-              La recolección y tratamiento de los datos personales tiene como finalidad conocer sobre el uso de Presupuesto Participativo y mejorar la propuesta.<br/>
+              La recolección y tratamiento de los datos personales tiene como finalidad conocer sobre el uso de Presupuesto Participativo y mejorar la propuesta.<br />
               Ciudad Nacional de Rosario no cederá a ninguna otra persona ni organismo los datos personales de los participantes, salvo orden judicial. Los datos recabados tienen por único objeto verificar que las propuestas sean presentadas por personas legalmente habilitadas para hacerlo y evitar abusos en el uso de la plataforma. Esta información será utilizada exclusivamente para obtener estadísticas generales de los/as usuarios/as.</p>
 
             <h3><span>Información proporcionada por los usuarios:</span></h3>
@@ -97,12 +106,11 @@ export default class Page extends Component {
 
             <h2><span>Tecnología:</span></h2>
             <p>
-              Presupuesto Participativo es un desarrollo basado en <a href="https://democracyos.org/" target="_blank">DemocracyOS</a>. DemocracyOS es una plataforma online de código abierto especialmente diseñada para informar, debatir y comprometerse con propuestas públicas hacia la construcción de una democracia adaptada al siglo XXI. DemocracyOS es desarrollado por la Fundación <a href="https://democraciaenred.org/" target="_blank">Democracia en Red</a>.
+              Presupuesto Participativo es un desarrollo basado en <a href="https://democraciaos.org/es/" target="_blank">DemocraciaOS</a>. DemocraciaOS es una plataforma online de código abierto especialmente diseñada para informar, debatir y comprometerse con propuestas públicas hacia la construcción de una democracia adaptada al siglo XXI. DemocraciaOS es desarrollado por la Fundación <a href="https://democraciaenred.org/" target="_blank">Democracia en Red</a>.
             </p>
-
-            <p><span></span></p>
           </div>
         </Anchor>
+
         <Jump goTop={this.goTop} />
         <Footer />
       </div>
