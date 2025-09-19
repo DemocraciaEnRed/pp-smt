@@ -63,7 +63,7 @@ class MobileMenu extends Component {
                     className={`header-link`}
                     onClick={() => window.location.href = '/propuestas'}
                     tabIndex="3">
-                    Ideas y Proyectos
+                    Ideas y proyectos
                   </Link>
                 </div>
                 <div className={`header-item ${window.location.pathname.includes('catalogo') ? 'active' : ''}`}>

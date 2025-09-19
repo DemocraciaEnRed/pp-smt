@@ -175,7 +175,7 @@ class Header extends Component {
                 tabIndex="83"
                 onClick={() => window.location.href = '/propuestas'}
               >
-                Ideas y Proyectos
+                Ideas y proyectos
               </Link>
             </li>
 
