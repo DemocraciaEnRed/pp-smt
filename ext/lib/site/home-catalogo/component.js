@@ -434,7 +434,7 @@ class HomePropuestas extends Component {
                   <div className='empty-msg'>
                     <div className='alert alert-success' role='alert'>
                       No se encontraron ideas. <br />
-                      si queres ver el seguimiento de ideas de años anteriores entra a <Link href="/archivo"> Archivo </Link>
+                      si queres ver el seguimiento de ideas de años anteriores entra a <Link href="/catalogo"> Catalogo </Link>
                     </div>
                   </div>
                 )}

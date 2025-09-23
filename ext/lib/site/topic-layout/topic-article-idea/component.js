@@ -92,7 +92,7 @@ class TopicArticle extends Component {
     const isProyecto = topic && topic.attrs && ['factible', 'ganador'].indexOf(topic.attrs.state) > -1
     const ideasIntegradas = topic && topic.integradas
     const isIntegrada = topic && topic.attrs && topic.attrs.state === 'integrado'
-    const section = window.location.href.includes("propuestas") ? "propuestas" : "archivo"
+    const section = window.location.href.includes("propuestas") ? "propuestas" : "catalogo"
     const referenciaIntegradoraUrl = topic && topic.attrs && topic.attrs['admin-comment-referencia'] && window.location.origin + `/${section}/topic/` + topic.attrs['admin-comment-referencia']
 
     if (!topic) {
