@@ -32,7 +32,7 @@ export class TopicCard extends Component {
     const isProyectistaButton = findAncestor(e.target, 'proyectista-wrapper')
     const isVotarButton = findAncestor(e.target, 'votar-button-wrapper')
     if (!isSeguirButton && !isProyectistaButton && !isVotarButton)
-      window.open(`${window.location.pathname}/topic/${this.props.topic.id}`, '_blank');
+      window.open(`${window.location.pathname}/topic/${this.props.topic.id}`);
   }
   render() {
     const { topic, onVote, onProyectista, user, forum } = this.props
