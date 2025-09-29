@@ -325,9 +325,9 @@ app.get('/export/topics/export-resultados-votantes',
     req.votes.forEach((ballot) => {
         const userId = ballot.user
         let theVotante = {
-          'ID Votante': `${escapeTxt(userId)}`,
-          'Email': `${escapeTxt(req.votantes[userId].email)}`,
-          'DNI': `${escapeTxt(ballot.dni)}`,
+          'ID Fiscal': `${escapeTxt(userId)}`,
+          'Email Fiscal': `${escapeTxt(req.votantes[userId].email)}`,
+          'DNI votante': `${escapeTxt(ballot.dni)}`,
           'Zona': `${escapeTxt(req.zonasName[ballot.zona])}`,
           'Voto 1': `${escapeTxt(ballot.voto1 ? req.topicsName[ballot.voto1] : "")}`,
           // 'Voto 2': `${escapeTxt(ballot.voto2 ? req.topicsName[ballot.voto2] : "")}`,

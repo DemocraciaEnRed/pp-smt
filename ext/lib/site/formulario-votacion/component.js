@@ -19,6 +19,7 @@ import Confirmacion from "./steps/confirmacion"
 import Agradecimiento from "./steps/agradecimiento"
 import Welcome from "./steps/bienvenida"
 import Skeleton from '../skeleton/component'
+import VotationPlace from './steps/votation-place'
 
 class FormularioVoto extends Component {
   constructor(props) {
@@ -173,7 +174,6 @@ class FormularioVoto extends Component {
 
     const { step, dni, hasVoted } = this.state
     const { user } = this.props
-    console.log(dni);
 
     if (!user.state.value.privileges.canManage) {
 
@@ -279,10 +279,11 @@ class FormularioVoto extends Component {
   renderStep = (step) => {
     const tags = this.state.activeTags.length > 0 ? this.state.activeTags : this.state.tags.map(t => t.id)
     const zonas = this.state.activeZonas.length > 0 ? this.state.activeZonas : this.state.zonas.map(t => t.id)
+    const user = this.props.user.state.value
 
     switch (step) {
       case 0:
-        return <SelectVoter user={this.props.user.state.value} zonas={this.state.zonas} setState={this.handleInputChange} />
+        return user.privileges.canManage ? <SelectVoter user={user} zonas={this.state.zonas} setState={this.handleInputChange} /> : <VotationPlace />
       case 1:
         return <Welcome changeStep={() => this.changeStep(this.state.step + 1)} texts={this.state.texts} />
       case 2:
@@ -347,8 +348,8 @@ class FormularioVoto extends Component {
         } else if (notInPadron === true) {
           // if user already voted, show warning and cant pass through
           return {
-            message: `El usuario con DNI ${dni} no se encuentra en el padrón, se lo agregará al mismo con el voto.`,
-            canPass: true
+            message: `El usuario con DNI ${dni} no se encuentra en el padrón.`,
+            canPass: false
           }
         } else if (noUser === true) {
           return {
@@ -483,7 +484,7 @@ class FormularioVoto extends Component {
           open
         >
           <h5>{warning.message}</h5>
-          <button className='btn btn-cancelar' onClick={() => this.closeDialog()}>Cancelar</button>
+          {warning.canPass && <button className='btn btn-cancelar' onClick={() => this.closeDialog()}>Cancelar</button>}
           <button className='btn btn-entendido' onClick={() => this.performNext(warning.canPass, step)}>Entendido</button>
         </dialog>
         }
@@ -519,7 +520,7 @@ class FormularioVoto extends Component {
           }
           {this.renderStep(step)}
           {step}
-          {forum.config.stage === 'votacion' && step !== welcome && step <= confirm && !(hasWarning | isTopicDialogOpen) && (
+          {forum.config.stage === 'votacion' && step !== welcome && step <= confirm && !(hasWarning | isTopicDialogOpen) && this.props.user.state.value.privileges.canManage && (
             <div className='footer-votacion'>
               <button className='button-anterior' disabled={step <= welcome ? true : false} onClick={() => this.changeStep(step - 1)}>
                 <span className='icon-arrow-left-circle'></span> Anterior

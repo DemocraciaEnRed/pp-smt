@@ -98,8 +98,8 @@ class Header extends Component {
           >
             <img
               src={config.logoMobile}
-              className='d-inline-block align-top'
-              alt="Logo de la Municipalidad de Mar del Plata"
+              className='d-inline-block align-top mobile-logo'
+              alt="Logo de la Municipalidad San Miguel de Tucuman"
               height='30'
             />
           </Link>
@@ -152,7 +152,7 @@ class Header extends Component {
             tabIndex="1">
             <img
               src={config.logo}
-              alt="Logo de la Municipalidad de Mar del Plata"
+              alt="Logo de la Municipalidad San Miguel de Tucuman"
               className='d-inline-block align-top'
             />
           </Link>

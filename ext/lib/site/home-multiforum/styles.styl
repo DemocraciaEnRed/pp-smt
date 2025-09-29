@@ -271,7 +271,7 @@
     background-size: contain;
     @media (max-width: 500px)
       background-position: right 0px bottom -90px;
-      padding-bottom: 250px
+      // padding-bottom: 250px
 
   .banner-ideas
     background-color: #fff;
@@ -294,11 +294,15 @@
     img 
       width: 110px
     .actions
-      width 50%;
+      width 100%;
       margin: auto;
       display: flex;
+      flex-direction: column
+      @media (min-width: 600px)
+        width 50%;
+        flex-direction: row
       .boton-foro
-        width 50%
+        width 100%
         font-family: 'Poppins', sans-serif
         border-radius: 5px;
         border: 3px solid $grisPrimary;
@@ -308,8 +312,10 @@
         padding: 15px 30px
         display: inline-block
         margin: 10px
+        @media (min-width: 600px)
+          width 50%
       .boton-votacion
-        width 50%
+        width 100%
         font-family: 'Poppins', sans-serif
         border: 2px solid #000;
         border-radius: 5px;
@@ -318,5 +324,7 @@
         padding: 15px 30px
         display: inline-block
         margin: 10px
+        @media (min-width: 600px)
+          width 50%
 *:focus
   outline: 1px solid

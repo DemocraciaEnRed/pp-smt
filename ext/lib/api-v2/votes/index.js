@@ -6,6 +6,9 @@ const apiV2 = require('lib/api-v2/db-api')
 const dbApi = require('lib/db-api')
 const { db } = require('democracyos-notifier')
 const log = debug('democracyos:api-v2:votes')
+var initPrivileges = require('lib/middlewares/user').initPrivileges
+var canCreate = require('lib/middlewares/user').canCreate
+var canManage = require('lib/middlewares/user').canManage
 
 const app = module.exports = express.Router()
 
@@ -26,9 +29,11 @@ app.get('/votes/hasVoted/:dni',
 app.post('/votes/create',
   middlewares.users.restrict, // restringe
   middlewares.forums.findFromBody,
+  initPrivileges, canCreate, canManage,
   function checkPadronIfAlreadyVoted(req, res, next) {
+    // console.log(req.user);
 
-    req.canManage = req.user.staff || req.forum.hasRole(req.user, 'admin')
+    req.canManage = req.user.staff || req.forum.hasRole(req.user, 'admin', 'moderator')
 
     const yearsDefault = req.forum.config.filterYear.split(',')
     let year = yearsDefault.slice(-1)

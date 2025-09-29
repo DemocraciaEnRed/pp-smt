@@ -22,15 +22,28 @@ export default class Footer extends Component {
         this.setState({ forum, texts: textsDict })
       })
   }
+
+  openFooter = () => {
+    this.setState({ mobileFooterExpand: !this.state.mobileFooterExpand })
+  }
+
   render() {
     const { forum, texts } = this.state
     return (
-      <footer className='footer-static'>
+      <footer className='footer-static' onClick={this.openFooter}>
         {forum && <PopUp forum={forum} />}
-        <div className='container'>
+        <div className={`container  expand-title ${this.state.mobileFooterExpand ? 'expand' : ''}`}>
           <div className='footer-info'>
             <div className='contacto-detalles'>
               <h3>CONTACTO</h3>
+              <span>{'>>'}</span>
+            </div>
+          </div>
+        </div>
+        <div className={`container footer-container ${this.state.mobileFooterExpand ? 'expand' : ''}`}>
+          <div className='footer-info'>
+            <div className='contacto-detalles'>
+              <h3 className='footer-contact-title'>CONTACTO</h3>
               <p dangerouslySetInnerHTML={{ __html: texts['footer-info'] }}></p>
               <div className='social-icon'>
                 <a aria-label='Ícono de facebook' className='social-facebook' tabIndex="102" href='https://www.facebook.com/MuniSMTucuman' target="_blank" />

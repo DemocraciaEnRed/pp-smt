@@ -48,7 +48,7 @@ export default function ThumbsVoto(props) {
           </div>
         </div>
 
-        <div className="row cont">
+        <div className="row cont cards">
           <div className="col-md-4">
             <div className='fondo-celeste rounded-xl p-1'>
               <div
