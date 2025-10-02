@@ -35,15 +35,17 @@
       height: 125px
     @media(max-width: 500px)
       height: 101px
-    & video
+    
+    & img
       width: 100%
       //muevo verticalmente un poco el video para que no corte tantas caras
       position: relative;
-      top: 10%;
-      transform: translateY(-27%);
-      @media(min-width: 2100px)
-        width: 2100px
-        margin: 0
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      @media(max-width: 768px)
+        top: 40%;      
+        transform: translate(-50%, -60%);
   .contenedor
     bottom: -30px
     @media(max-width: 768px)
