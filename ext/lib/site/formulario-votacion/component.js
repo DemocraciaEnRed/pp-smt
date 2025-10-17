@@ -19,7 +19,7 @@ import Confirmacion from "./steps/confirmacion"
 import Agradecimiento from "./steps/agradecimiento"
 import Welcome from "./steps/bienvenida"
 import Skeleton from '../skeleton/component'
-import VotationPlace from './steps/votation-place'
+
 
 class FormularioVoto extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class FormularioVoto extends Component {
 
       // Control for Step 0
       notInPadron: null,
-      differentZone: null,
+      differentUser: null,
       searchedUser: null,
       noUser: null,
 
@@ -215,7 +215,7 @@ class FormularioVoto extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const { forum, dni, zona, voto1, userPrivileges } = this.state
+    const { forum, dni, zona, voto1, userPrivileges, differentUser } = this.state
     const { user } = this.props
     const formData = {
       forum: forum.id,
@@ -226,10 +226,17 @@ class FormularioVoto extends Component {
       voto1,
       // voto2
     }
-    voteStore.sendVotes(formData)
-      .then((vote) => {
-        this.changeStep(this.state.step + 1)
-      })
+    if (differentUser) {
+      voteStore.sendEmptyVotes(formData)
+        .then((vote) => {
+          this.changeStep(this.state.step + 1)
+        })
+    } else {
+      voteStore.sendVotes(formData)
+        .then((vote) => {
+          this.changeStep(this.state.step + 1)
+        })
+    }
   }
 
   handleCheckboxInputChange(event) {
@@ -283,9 +290,9 @@ class FormularioVoto extends Component {
 
     switch (step) {
       case 0:
-        return user.privileges.canManage ? <SelectVoter user={user} zonas={this.state.zonas} setState={this.handleInputChange} /> : <VotationPlace />
+        return <SelectVoter user={user} zonas={this.state.zonas} setState={this.handleInputChange} />
       case 1:
-        return <Welcome changeStep={() => this.changeStep(this.state.step + 1)} texts={this.state.texts} />
+        return <Welcome changeStep={this.changeStep} step={step} differentUser={this.state.differentUser} texts={this.state.texts} />
       case 2:
         return <Info texts={this.state.texts} />
       case 3:
@@ -325,6 +332,7 @@ class FormularioVoto extends Component {
       //   />
       case 4:
         return <Confirmacion
+          differentUser={this.state.differentUser}
           topics={this.state.topics.filter(t => [this.state.voto1, this.state.voto2].includes(t.id))}
         />
       case 5:
@@ -336,11 +344,12 @@ class FormularioVoto extends Component {
   }
 
   checkWarning = () => {
-    const { step, dni, zona, voto1, notInPadron, noUser, hasVoted, differentZone, searchedUser, zonas } = this.state
+    const { step, dni, zona, voto1, notInPadron, noUser, hasVoted, differentUser, searchedUser, zonas } = this.state
+    const user = this.props.user.state.value
 
     switch (step) {
       case 0:
-        if (!dni || !zona) {
+        if ((!dni || !zona) && !(user.privileges.canManage && differentUser)) {
           return {
             message: 'Los campos "DNI" y "Zona de Residencia" no pueden quedar vacíos',
             canPass: false
@@ -361,13 +370,11 @@ class FormularioVoto extends Component {
             message: `El usuario con DNI ${dni} ya votó anteriormente. No pueden continuar.`,
             canPass: false
           }
-          // } else if (differentZone === true) {
-          //   console.log();
-
-          //   return {
-          //     message: `El usuario con DNI ${dni} declaró como zona "${zonas.find(z => z.id === searchedUser.zona).nombre}".`,
-          //     canPass: true
-          //   }
+        } else if (differentUser === true) {
+          return {
+            message: `El usuario con DNI ${dni} se encuentra en el padron y puede votar`,
+            canPass: true,
+          }
         } else {
           return {}
         }
@@ -389,12 +396,18 @@ class FormularioVoto extends Component {
 
   handleNext = () => {
     const { step, dni, zona, forum } = this.state
+    const { user } = this.props
+
+    let differentUserCanPass = false
+
+    if (!user.state.value.dni.includes(dni) && user.state.value.privileges.canManage) differentUserCanPass = true
+
     if (step == 0) {
       this.setState({
         notInPadron: null,
         hasVoted: null,
         noUser: null,
-        differentZone: null,
+        differentUser: null,
         searchedUser: null
       }, () => {
         window.fetch(`api/padron/search/dni?dni=${dni}&forum=${forum.name}`, {
@@ -407,7 +420,6 @@ class FormularioVoto extends Component {
         })
           .then(res => res.json())
           .then(res => {
-            console.log(res);
 
             // if response is an empty object
             if (Object.keys(res).length === 0) {
@@ -428,10 +440,16 @@ class FormularioVoto extends Component {
             } else if (res && res.user && zona != res.user.zona) {
               // user is in padron, but declared a differnet zone
               this.setState({
-                differentZone: true,
                 searchedUser: res.user
               })
             }
+
+            if (user.state.value.privileges.canManage && !user.state.value.dni.includes(dni)) {
+              this.setState({
+                differentUser: true,
+              })
+            }
+
             const warning = this.checkWarning()
             warning && warning.message ? this.setState({ warning: warning }) : this.changeStep(step + 1)
           })
@@ -449,7 +467,6 @@ class FormularioVoto extends Component {
 
   performNext = (canPass, step) => {
     this.closeDialog()
-
     if (canPass) {
       this.changeStep(step + 1)
     }
@@ -520,7 +537,7 @@ class FormularioVoto extends Component {
           }
           {this.renderStep(step)}
           {step}
-          {forum.config.stage === 'votacion' && step !== welcome && step <= confirm && !(hasWarning | isTopicDialogOpen) && this.props.user.state.value.privileges.canManage && (
+          {forum.config.stage === 'votacion' && step !== welcome && step <= confirm && !(hasWarning | isTopicDialogOpen) && (
             <div className='footer-votacion'>
               <button className='button-anterior' disabled={step <= welcome ? true : false} onClick={() => this.changeStep(step - 1)}>
                 <span className='icon-arrow-left-circle'></span> Anterior
