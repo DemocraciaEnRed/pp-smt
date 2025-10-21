@@ -349,9 +349,9 @@ class FormularioVoto extends Component {
 
     switch (step) {
       case 0:
-        if ((!dni || !zona) && !(user.privileges.canManage && differentUser)) {
+        if ((!dni || !zona)) {
           return {
-            message: 'Los campos "DNI" y "Zona de Residencia" no pueden quedar vacíos',
+            message: `Los campos "DNI" y ${differentUser ? '"Urna"' : '"Zona de Residencia"'} no pueden quedar vacíos`,
             canPass: false
           }
         } else if (notInPadron === true) {
@@ -483,7 +483,7 @@ class FormularioVoto extends Component {
 
   render() {
 
-    const { forum, step, warning, forumAndTopicFetched, userFetched, isTopicDialogOpen, topicDialog } = this.state
+    const { forum, step, warning, hasVoted, forumAndTopicFetched, userFetched, isTopicDialogOpen, topicDialog } = this.state
 
     if (!forum) return null
     if (!forum.config.stage === 'votacion') return <Close />
@@ -537,14 +537,14 @@ class FormularioVoto extends Component {
           }
           {this.renderStep(step)}
           {step}
-          {forum.config.stage === 'votacion' && step !== welcome && step <= confirm && !(hasWarning | isTopicDialogOpen) && (
+          {forum.config.stage === 'votacion' && step !== welcome && step <= confirm && !(hasWarning | isTopicDialogOpen) && hasVoted !== "yes" && (
             <div className='footer-votacion'>
               <button className='button-anterior' disabled={step <= welcome ? true : false} onClick={() => this.changeStep(step - 1)}>
                 <span className='icon-arrow-left-circle'></span> Anterior
               </button>
               {step === confirm ?
                 <button className='button-siguiente' onClick={this.handleSubmit}>
-                  Enviar Votos <span className='icon-like'></span>
+                  Enviar Voto <span className='icon-like'></span>
                 </button> :
                 <button
                   className='btn button-siguiente'

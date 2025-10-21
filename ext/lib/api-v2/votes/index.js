@@ -24,16 +24,24 @@ app.get('/votes/hasVoted/:dni',
     })
   })
 
+app.get('/votes/topic/:id',
+  middlewares.users.restrict, // restringe
+  middlewares.topics.findById,
+  function getVotesByTopic(req, res, next) {
+    dbApi.vote.getVotesByTopicPopulate(req.topic.id).then((votes) => {
+      res.status(200).json(votes)
+    })
+  })
+
+
 
 
 app.post('/votes/create',
   middlewares.users.restrict, // restringe
   middlewares.forums.findFromBody,
-  initPrivileges, canCreate, canManage,
   function checkPadronIfAlreadyVoted(req, res, next) {
     // console.log(req.user);
-
-    req.canManage = req.user.staff || req.forum.hasRole(req.user, 'admin', 'moderator')
+    req.canManage = req.user.staff || req.forum.hasRole(req.user, 'admin')
 
     const yearsDefault = req.forum.config.filterYear.split(',')
     let year = yearsDefault.slice(-1)
@@ -136,8 +144,10 @@ app.post('/votes/create',
 app.post('/votes/create-empty-vote',
   middlewares.users.restrict, // restringe
   middlewares.forums.findFromBody,
+  initPrivileges, canCreate, canManage,
+
   function checkPadronIfAlreadyVoted(req, res, next) {
-    req.canManage = req.user.staff || req.forum.hasRole(req.user, 'admin')
+    req.canManage = req.user.staff || req.forum.hasRole(req.user, 'admin', 'moderator')
 
     const yearsDefault = req.forum.config.filterYear.split(',')
     let year = yearsDefault.slice(-1)
@@ -187,28 +197,13 @@ app.post('/votes/create-empty-vote',
     }
   },
 
+  middlewares.zonas.findFromBody,
   function postVote(req, res, next) {
-    // if req.voto1.zona is different from req.user.zona, return error
-    // console.log('Voto1')
-    // console.log(req.voto1)
-    // console.log('Voto2')
-    // console.log(req.voto2)
-    // console.log('Zona')
-    // console.log(req.zona)
-    // if (!req.canManage && req.voto1.zona.toString() !== req.user.zona.toString()) {
-    //   log('User is not in the same zona as the vote -- sending error')
-    //   res.status(403).json({
-    //     error: 'Cant vote projects from different zone'
-    //   })
-    //   return
-    // }
-    console.log('llega????????????????????????????');
-
     apiV2.votes.create({
       user: req.user,
       userPrivileges: req.body.userPrivileges,
       dni: req.body.dni,
-      zona: req.zona,
+      urna: req.zona,
       voto1: req.voto1,
       // voto2: req.voto2
     })
@@ -234,3 +229,44 @@ app.post('/votes/create-empty-vote',
         next(err)
       })
   })
+
+
+
+app.post('/votes/:id/addVotes',
+  middlewares.users.restrict, // restringe
+  middlewares.topics.findById,
+  function postVotes(req, res, next) {
+    const votes = []
+    for (var i = 0; i < req.body.quantity; i++) {
+      votes.push({
+        user: req.user.id,
+        userPrivileges: req.body.userPrivileges,
+        dni: '',
+        zona: req.topic.zona,
+        voto1: req.topic.id,
+        urna: req.body.ballotBox
+      })
+    }
+    if (votes.length) {
+      apiV2.votes.createMany(votes)
+        .then((vote) => {
+          res.status(200).json({
+            status: 200,
+            results: {
+              vote: 'fulfilled'
+            }
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+          // reglas para que devolver errores propios, por ejemplo NOT_VOTED o ALREADY_VOTED
+          if (err.code) {
+            return next({ status: 400, code: err.code })
+          }
+          next(err)
+        })
+    }
+    //
+  }
+
+)
