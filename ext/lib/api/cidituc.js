@@ -14,6 +14,22 @@ app.get('/login', (req, res) => {
   res.redirect('https://ciudaddigital.smt.gob.ar/#/login?next=presupuesto-participativo');
 });
 
+function separarCuit(cuit) {
+
+  // Eliminar guiones, espacios u otros caracteres no numéricos
+  const limpio = `${cuit}`.replace(/\D/g, "");
+
+  if (limpio.length !== 11) {
+    throw new Error("El CUIT debe tener 11 dígitos");
+  }
+
+  const tipo = limpio.slice(0, 2);
+  const dni = limpio.slice(2, 10);
+  const verificador = limpio.slice(10);
+
+  return { tipo, dni, verificador };
+}
+
 function assignProfile(user, profile, accessToken, fn) {
   try {
 
@@ -37,18 +53,12 @@ function assignProfile(user, profile, accessToken, fn) {
       user.set('email', profile.email_persona)
     }
     if (profile.documento_persona) {
-      user.set('dni', profile.documento_persona)
+      user.set('dni', separarCuit(profile.documento_persona).dni)
     }
 
 
     user.save(fn)
-    dbApi.padron.create({ dni: profile.documento_persona }, function (err, newPadron) {
-      if (err) return next(err)
-      log('OK! New entry in padron')
-      dbApi.padron.updateUserId(profile.documento_persona, user.id).then(() => {
-        log('OK! assign padron to user ' + user.id)
-      })
-    })
+    dbApi.padron.updateUserId(user.dni, user._id)
 
   } catch (err) {
     console.error(err)

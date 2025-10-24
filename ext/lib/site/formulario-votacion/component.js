@@ -400,7 +400,7 @@ class FormularioVoto extends Component {
 
     let differentUserCanPass = false
 
-    if (!user.state.value.dni.includes(dni) && user.state.value.privileges.canManage) differentUserCanPass = true
+    if (dni && user.state.value.privileges.canManage) differentUserCanPass = true
 
     if (step == 0) {
       this.setState({
@@ -444,7 +444,7 @@ class FormularioVoto extends Component {
               })
             }
 
-            if (user.state.value.privileges.canManage && !user.state.value.dni.includes(dni)) {
+            if (user.state.value.privileges.canManage && dni) {
               this.setState({
                 differentUser: true,
               })
