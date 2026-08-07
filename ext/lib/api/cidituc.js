@@ -7,6 +7,12 @@ const fetch = require('node-fetch')
 const dbApi = require('lib/db-api')
 const { log } = require('gulp-util')
 
+const https = require("https");
+
+const agent = new https.Agent({
+  rejectUnauthorized: false
+});
+
 const app = module.exports = express()
 
 
@@ -76,6 +82,7 @@ passport.use(
 
       // Consultar la API externa para obtener los datos del usuario
       const response = await fetch("https://estadisticas.smt.gob.ar:5000/usuarios/authStatus", {
+        agent,
         headers: { Authorization: `${token}` },
       });
 
